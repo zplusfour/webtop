@@ -7,6 +7,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const fetch = require('node-fetch');
+const path = require('path');
 
 const atob = (str) => {
   return Buffer.from(str, 'base64').toString('binary');
@@ -18,6 +19,11 @@ const download = async (url, imgpth) => {
   fs.writeFileSync(imgpth, buffer);
 };
 
+/**
+ * cea - create electron app
+ * @param {string} url website's url
+ * @param {string} pth app's path
+ */
 const cea = (url, pth) => {
   const icons = `https://s2.googleusercontent.com/s2/favicons?domain_url=`;
   var iconPath;
@@ -41,7 +47,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: '${iconPath}',
+    icon: '${path.resolve(iconPath)}',
   });
 
   win.setMenu(null);
@@ -72,10 +78,12 @@ app.on('window-all-closed', () => {
     version: '1.0.0',
     main: 'index.js',
     scripts: {
-      start: 'electron .'
+      start: 'electron .',
+      build: 'npx electron-packager . cea --platform=windows --arch=x86 --out=dist --overwrite',
     },
     dependencies: {
-      electron: '^8.0.0'
+      electron: '^8.0.0',
+      'electron-packager': '^7.0.0',
     }
   };
 
