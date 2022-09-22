@@ -6,7 +6,7 @@
 
 const fs = require('fs');
 const { execSync } = require('child_process');
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 const path = require('path');
 
 const atob = (str) => {
