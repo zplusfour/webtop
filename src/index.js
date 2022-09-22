@@ -1,7 +1,7 @@
 /**
  * WebTop - turn any website into an app
  */
-const { webtop } = require('./webtop.js');
+import { WebTop } from './webtop.js'
 const validURL= (str) => {
   var pattern = new RegExp('^(https?:\\/\\/)?'+
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
@@ -19,7 +19,7 @@ const main = (argv) => {
   
   const url = argv[0];
   const path = argv[1];
-  const wt = new webtop(url, path);
+  const wt = new WebTop(url, path);
   validURL(url) ? wt.wp() : console.log('Invalid URL.');
 }
 

@@ -1,7 +1,11 @@
 # WebTop - Turn any website into an app! [WIP]
 ***
 ### Docs
+First things first, install the required dependencies.
 ```
-$ webtop [url] [path]
+npm install
 ```
-so url is the website you want to turn into an app, and path is the path to the directory where you want to save the app.
+Then
+```
+$ node src [url] [path]
+```

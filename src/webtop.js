@@ -1,9 +1,9 @@
 /**
  * WebTop wrapper
  */
-const { cea } = require('./scripts/cea.js');
+import { cea } from './scripts/cea.js'
 
-class WebTop {
+export class WebTop {
   /**
    * @param {string} url
    * @param {string} path
@@ -17,5 +17,3 @@ class WebTop {
     cea(this.url, this.path);
   }
 }
-
-exports.webtop = WebTop;

@@ -1,0 +1,24 @@
+{
+  "name": "webtop",
+  "version": "1.0.0",
+  "description": "hi",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zplusfour/webtop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zplusfour/webtop/issues"
+  },
+  "homepage": "https://github.com/zplusfour/webtop#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}

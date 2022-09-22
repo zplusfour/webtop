@@ -2,43 +2,31 @@
  * CEA - my own Create Electron App
  */
 
+import * as fs from 'fs'
+import { execSync } from 'child_process';
+import fetch from 'node-fetch';
+import path from 'path';
 
-
-const fs = require('fs');
-const { execSync } = require('child_process');
-const fetch = require('node-fetch');
-const path = require('path');
-
-const atob = (str) => {
-  return Buffer.from(str, 'base64').toString('binary');
-};
-
-const download = async (url, imgpth) => {
-  const res = await fetch(url);
-  const buffer = await res.buffer();
-  fs.writeFileSync(imgpth, buffer);
-};
+// const download = async (url, imgpth) => {
+//   const res = await fetch(url);
+//   const buffer = await res.arrayBuffer();
+//   fs.writeFileSync(imgpth, buffer);
+// };
 
 /**
  * cea - create electron app
  * @param {string} url website's url
  * @param {string} pth app's path
  */
-const cea = (url, pth) => {
-  const icons = `https://s2.googleusercontent.com/s2/favicons?domain_url=`;
-  var iconPath;
+export const cea = (url, pth) => {
+  console.log('Working on that...');
+  // const icons = `https://s2.googleusercontent.com/s2/favicons?domain_url=`;
+  // var iconPath;
 
   if (url.includes('http') || url.includes('https')) {
-    iconPath = `${pth}/${url.split('/')[2]}.png`;
-    download(icons + url, iconPath);
-    iconPath = iconPath.replace('/', '\\');
-    console.log(iconPath);
+    // okay
   } else {
-    iconPath = `${pth}/${url}.png`;
-    download(icons + url, iconPath);
-    iconPath = iconPath.replace('/', '\\');
     url = 'https://' + url;
-    console.log(iconPath);
   }
 
   const scriptString = `
@@ -47,7 +35,6 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: '${path.resolve(iconPath)}',
   });
 
   win.setMenu(null);
@@ -82,13 +69,12 @@ app.on('window-all-closed', () => {
       build: 'npx electron-packager . cea --platform=windows --arch=x86 --out=dist --overwrite',
     },
     dependencies: {
-      electron: '^8.0.0',
-      'electron-packager': '^7.0.0',
+      electron: '^20.2.0',
+      'electron-packager': '^16.0.0',
     }
   };
 
   fs.writeFileSync(`${pth}/package.json`, JSON.stringify(pkg));
+  console.log('Done! Running the application...');
   execSync(`cd ${pth} && npm install && npm start`);
 }
-
-exports.cea = cea;
